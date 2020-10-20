@@ -1,0 +1,60 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.RequestLog>
+
+<table class="display table table-bordered" id="request_log_table" width="100%">
+    <thead class="custom-table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.logTime)</th>
+            <th>@Html.DisplayNameFor(model => model.clientIP)</th>
+            <th>@Html.DisplayNameFor(model => model.elapsedTime)</th>
+            <th>@Html.DisplayNameFor(model => model.instance)</th>
+            <th>@Html.DisplayNameFor(model => model.responseStatus)</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.logTime)</th>
+            <th>@Html.DisplayNameFor(model => model.clientIP)</th>
+            <th>@Html.DisplayNameFor(model => model.elapsedTime)</th>
+            <th>@Html.DisplayNameFor(model => model.instance)</th>
+            <th>@Html.DisplayNameFor(model => model.responseStatus)</th>
+        </tr>
+    </tfoot>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.logTime.ToLongTimeString()</td>
+                <td>@item.clientIP</td>
+                <td>@item.elapsedTime</td>
+                <td title="@item.instance"><label onclick="AppendRequestInstance('@item.instance')">@item.instance</label></td>
+                <td>
+                    @{
+                        if (item.responseStatus.Equals("OK", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <label class="text-success">@item.responseStatus</label>
+                        }
+                        else if (item.responseStatus.Equals("BadRequest", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <label class="text-danger">@item.responseStatus</label>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.responseStatus)
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<style>
+    td {
+        max-width: 400px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.Error>
+
+
+<table class="display table table-bordered" id="error_log_table" width="100%">
+    <thead class="custom-table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.errorTime)</th>
+            <th>@Html.DisplayNameFor(model => model.ipAddress)</th>
+            <th>@Html.DisplayNameFor(model => model.title)</th>
+            <th>@Html.DisplayNameFor(model => model.instance)</th>
+            <th>@Html.DisplayNameFor(model => model.userAgent)</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.errorTime)</th>
+            <th>@Html.DisplayNameFor(model => model.ipAddress)</th>
+            <th>@Html.DisplayNameFor(model => model.title)</th>
+            <th>@Html.DisplayNameFor(model => model.instance)</th>
+            <th>@Html.DisplayNameFor(model => model.userAgent)</th>
+        </tr>
+    </tfoot>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr  data-toggle="modal" data-target="#view-error-modal" data-id="@item.errorId" style="cursor: pointer;">
+                <td>@item.errorTime.ToString("MMMM dd, yyyy H:mm:ss")</td>
+                <td>@item.ipAddress</td>
+                <td title="@item.title">@item.title</td>
+                <td title="@item.instance">@item.instance</td>
+                <td title="@item.userAgent">@item.userAgent</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<style>
+    td {
+        max-width: 210px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>

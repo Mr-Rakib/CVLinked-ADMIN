@@ -1,0 +1,60 @@
+﻿@model CVLAdminPanel.Models.Model.Error
+
+<div class="modal-content ">
+    <div class="modal-header">
+        <div class="p-1">
+            <h3 class=" font-weight-normal text-danger"><i class="fas fa-bug text-danger"></i> &nbsp;ERROR DETAILS</h3>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><i class="fas fa-times text-dark"></i></span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class="container bootstrap snippet">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row text-succes">
+                            <div class="row col-md-12 border-bottom mb-2">
+                                <label class="col-md-2" asp-for="@Model.errorTime"></label>
+                                <label class="col-md-4"> @Model.errorTime.ToString("MMMM, dd yyyy")</label>
+
+                                <label class="col-md-2" asp-for="@Model.ipAddress"></label>
+                                <label class="col-md-4"> @Model.ipAddress</label>
+                            </div>
+
+                            <label class="col-md-2" asp-for="@Model.releventId"> </label>
+                            <label class="col-md-10"> @(string.IsNullOrEmpty(Model.releventId) ? "N/A" : Model.releventId)</label>
+
+                            <label class="col-md-2" asp-for="@Model.instance"> </label>
+                            <label class="col-md-10"> @Model.instance</label>
+
+                            <label class="col-md-2 " asp-for="@Model.title"> </label>
+                            <label class="col-md-10"> @Model.title</label>
+
+                            <label class="col-md-2" asp-for="@Model.userAgent"></label>
+                            <label class="col-md-10"> @Model.userAgent</label>
+
+
+                            <label class="col-md-2  mt-3" asp-for="@Model.detail"> </label>
+                            <label class="col-md-10 error-details-color mt-3"> @Model.detail</label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    label {
+        /* max-width: 254px; */
+        overflow: hidden;
+        /* white-space: nowrap; */
+        text-overflow: ellipsis;
+    }
+    
+</style>

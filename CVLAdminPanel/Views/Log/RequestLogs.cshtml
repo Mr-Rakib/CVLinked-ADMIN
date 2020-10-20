@@ -1,0 +1,26 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.RequestLog>
+
+@{
+    ViewBag.HeaderTitle = "LOGS";
+    ViewBag.Title = "Request Logs";
+}
+
+
+<div class=" row  pb-2">
+    <div class="text-left col-md-8 pr-2">
+        <h2 class="font-weight-normal"><i class="fas fa-list p-1 "></i>REQUEST LOGS</h2>
+    </div>
+    <div class=" text-right col-md-4">
+        <form method="get" asp-action="RequestLogs" asp-controller="Log" asp-route-dateTime="dateTime.value" class=" form-row pb-2">
+            <input id="abc" class="form-control col-md-9" type="date" name="dateTime" style="border-radius:0" value=@ViewBag.RequestLogDate.ToString("yyyy-MM-dd")>
+            <button type="submit" class="btn btn-primary col-md-3" style="border-radius:0">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="Company-List-View ">
+    <div class="table-responsive">
+        <h5 class="text-center">ACCORDING TO GTM/UTC +0</h5>
+        @Html.Partial("RequestLogLists")
+    </div>
+</div>

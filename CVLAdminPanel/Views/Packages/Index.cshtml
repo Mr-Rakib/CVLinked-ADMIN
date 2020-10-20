@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.Package>
+@{
+    ViewBag.Title = "PACKAGES";
+    ViewBag.HeaderTitle = "Manage Packages";
+    ViewBag.Action = "Index";
+    ViewBag.Controller = "Packages";
+}
+
+@{
+    if (TempData["UpdatePackage"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["UpdatePackage"]
+        </div>
+    }
+}
+
+
+<div>
+    <div class=" row pt-1 pb-1">
+        <div class="text-left col-md-8">
+            <h2 class="font-weight-normal text-default"><i class="fas fa-box-open"></i> &nbsp;@ViewBag.Title</h2>
+        </div>
+        <div class="col-md-4 mb-2 float-right">
+            @Html.Partial("Partial/_cards")
+        </div>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="Company-List-View ">
+                @Html.Partial("Partial/_packageList", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Add Packages Modal-->
+<div class="modal fade" id="add-package-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-" role="document">
+        <div class="modal-content" id="packageSaveModal">
+
+        </div>
+    </div>
+</div>
+
+
+<!--Edit Packages Modal-->
+<div class="modal fade" id="edit-package-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-" role="document">
+        <div class="modal-content" id="packageUpdModal">
+
+        </div>
+    </div>
+</div>
+
+<!--Delete Modal-->
+<div class="modal fade" id="delete-package-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-" role="document">
+        <div class="modal-content" id="packageDeleteModal">
+
+        </div>
+    </div>
+</div>

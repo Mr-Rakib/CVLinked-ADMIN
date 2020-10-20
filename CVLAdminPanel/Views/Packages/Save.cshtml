@@ -1,0 +1,99 @@
+﻿@model CVLAdminPanel.Models.Model.Package
+
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title-default"> </h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+
+<form method="post" asp-action="Edit" asp-controller="Packages">
+    <div class="modal-body">
+
+        <input type="hidden" asp-for="@Model.packageId" class="form-control" value="">
+        <div class="form-row">
+            <div class="col">
+                <label>Package Name</label>
+                <input type="text" asp-for="@Model.packageName" class="form-control" placeholder="Package Name" >
+            </div>
+
+            <div class="col">
+                <label asp-for="packagePrice" class="control-label"></label>
+                <input asp-for="packagePrice" class="form-control" />
+                <span asp-validation-for="packagePrice" class="text-danger"></span>
+            </div>
+
+            <div class="col-6">
+                <label asp-for="packageDetail" class="control-label"></label>
+                <input asp-for="packageDetail" class="form-control" />
+                <span asp-validation-for="packageDetail" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-row mt-4">
+            <div class="col">
+                <div class="custom-control custom-checkbox">
+                    @Html.CheckBoxFor(x => Model.cvBrowsing, new { @class = "custom-control-input", @checked = "checked" })
+                    <label class="custom-control-label" asp-for="cvBrowsing">Enable CV Browsing </label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="custom-control custom-checkbox">
+                    @Html.CheckBoxFor(x => Model.skillTest, new { @class = "custom-control-input", @checked = "checked" })
+                    <label class="custom-control-label" asp-for="skillTest">Enable Skill Test</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="custom-control custom-checkbox">
+                    @Html.CheckBoxFor(x => Model.examTest, new { @class = "custom-control-input", @checked = "checked" })
+                    <label class="custom-control-label" asp-for="examTest">Enable Exam Test</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row mt-3">
+            <div class="col">
+                <div class="custom-control custom-checkbox ">
+                    @Html.CheckBoxFor(x => Model.wallet, new { @class = "custom-control-input", @checked = "checked" })
+                    <label class="custom-control-label" asp-for="wallet">Wallet Access</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="custom-control custom-checkbox">
+                    @Html.CheckBoxFor(x => Model.isActive, new { @class = "custom-control-input", @checked = "checked" })
+                    <label class="custom-control-label" asp-for="isActive">Activate this Package? </label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="custom-control custom-checkbox">
+                    @Html.CheckBoxFor(x => Model.isPromotional, new { @class = "custom-control-input", @checked = "checked" })
+                    <label class="custom-control-label" asp-for="isPromotional">Is Package Promotional?</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row mt-4">
+            <div class="col">
+                <label asp-for="cvDownloads">CV Download</label>
+                <input type="number" class="form-control" placeholder="CV Download" asp-for="cvDownloads" />
+            </div>
+            <div class="col">
+
+                <label asp-for="jobAnnouncements">CV Download</label>
+                <input type="number" class="form-control" asp-for="jobAnnouncements" placeholder="Enter Job Announcement Count">
+            </div>
+            <div class="col">
+                <label asp-for="validity">Validity of Package (Days)</label>
+                <input type="number" class="form-control" placeholder="Enter Validity Days" asp-for="validity">
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="recommended">
+        <input type="hidden" asp-for="promotion">
+        <input type="hidden" asp-for="mostPopular">
+        <input type="hidden" asp-for="isActive">
+
+    </div>
+
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Update Package" />
+        <input type="reset" class="btn btn-danger" data-dismiss="modal" value="Cancel" />
+    </div>
+</form>

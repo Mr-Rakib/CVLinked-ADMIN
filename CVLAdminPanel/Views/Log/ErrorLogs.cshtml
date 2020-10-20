@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.Error>
+
+@{
+    ViewBag.HeaderTitle = "LOGS";
+    ViewBag.Title = "Error Logs";
+}
+
+
+<div class=" row  pb-2">
+    <div class="text-left col-md-6 pr-2">
+        <h2 class="font-weight-normal"><i class="fas fa-list p-1 "></i>ERROR LOGS</h2>
+    </div>
+    <div class=" text-right col-md-6">
+        <form method="get" asp-action="ErrorLogs" asp-controller="Log" asp-route-fromDate="dateTime.value" asp-route-toDate="dateTime.value" class=" form-row pb-2 ">
+
+            <input class="label col-md-1 form-control text-center  bg-white" value="FROM" disabled />
+            <input class="form-control col-md-4 text-center border-radius-0" type="date" name="fromDate"  value=@ViewBag.ErrorFromDate.ToString("yyyy-MM-dd")>
+            
+            <input class="label col-md-1 form-control text-center bg-white" value="TO" disabled />
+            <input class="form-control col-md-4 text-center border-radius-0" type="date" name="toDate" value=@ViewBag.ErrorToDate.ToString("yyyy-MM-dd")>
+
+            <button type="submit" class="btn custom-table col-md-2 border-radius-0">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="Company-List-View ">
+    <div class="table-responsive">
+        <h5 class="text-center">ACCORDING TO GTM/UTC +0</h5>
+        @Html.Partial("ErrorLogLists")
+    </div>
+</div>
+
+<div class="modal fade" id="view-error-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-" role="document" id="viewerrormodal">
+
+    </div>
+</div>

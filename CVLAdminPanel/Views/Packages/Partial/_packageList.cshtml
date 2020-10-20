@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.Package>
+
+<table class="display table table-bordered" id="employer_table" width="100%">
+    <thead class="custom-table">
+        <tr>
+            <th scope="col">Sl No.</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.packageName)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.packagePrice)</th>
+
+            <th scope="col">@Html.DisplayNameFor(model => model.cvBrowsing)</th>
+
+            <th scope="col">@Html.DisplayNameFor(model => model.cvDownloads)</th>
+            <th scope="col"> @Html.DisplayNameFor(model => model.jobAnnouncements)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.wallet)</th>
+            <th scope="col"> @Html.DisplayNameFor(model => model.validity)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.isActive)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.isPromotional)</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span class="font-weight-bolder">
+                            @(i++)
+                        </span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.packageName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.packagePrice)
+                    </td>
+
+                    <td>
+                        @{ if (item.cvBrowsing)
+                            { <i class="fa fa-check text-success"></i>}
+                            else
+                            {<i class="fa fa-times text-danger"></i>}
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cvDownloads)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.jobAnnouncements)
+                    </td>
+                    <td>
+                        @{ if (item.wallet)
+                            { <i class="fa fa-check text-success"></i>}
+                            else
+                            {<i class="fa fa-times text-danger"></i>}
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.validity)
+                    </td>
+                    <td>
+                        @{ if (item.isActive)
+                            {
+                                <a title="Active" class="btn btn-white btn-sm" asp-controller="Packages" asp-action="DeactivePackages" asp-route-id="@item.packageId" onclick="return DeactiveConfirmation()">
+                                    <i class="fa fa-check text-success"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a title="Deactive" class="btn btn-white btn-sm" asp-controller="Packages" asp-action="ActivePackage" asp-route-id="@item.packageId" onclick="return DeactiveConfirmation()">
+                                    <i class="fa fa-times text-danger"></i>
+                                </a>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{ if (item.isPromotional)
+                            { <i class="fa fa-check text-success"></i>}
+                            else
+                            {<i class="fa fa-times text-danger"></i>}
+                        }
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a  data-toggle="modal" data-target="#edit-package-modal" data-id="@item.packageId"><i class="fa fa-edit text-default"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
