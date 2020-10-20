@@ -1,0 +1,17 @@
+﻿@{
+
+    var controller = ViewContext.RouteData.Values["controller"].ToString();
+    var action = ViewContext.RouteData.Values["action"].ToString();
+    if (controller == "Login" || action == "ForgetPassword" )
+    {
+        Layout = "_Layout_Login";
+    }
+    else if(controller == "Error")
+    {
+        Layout = "";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
+}

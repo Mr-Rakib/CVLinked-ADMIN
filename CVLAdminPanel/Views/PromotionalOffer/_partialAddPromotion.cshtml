@@ -1,0 +1,62 @@
+﻿@model CVLAdminPanel.Models.Model.Promotion
+@{ 
+    string token = User.FindFirst("access_token").Value;
+    var packageList = new PackageService().FindAll(token);
+}
+
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title-default">Add Promotion <i class="fa fa-plus-square text-default p-1"></i></h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form method="post" asp-action="AddPromotion" asp-controller="PromotionalOffer">
+    <div class="modal-body">
+
+        <div class="form-row">
+            <div class="col">
+                <label for="">Choose Package</label>
+                <select asp-for="PackageId" class="form-control" disabled>
+                    @foreach (var pac in packageList)
+                    {
+                        <option value="@pac.packageId">@pac.packageName</option>
+                    }
+                </select>
+                </select>
+            </div>
+            <div class="col">
+                <label for="">Promotional Price</label>
+                <input type="number" class="form-control" placeholder="Promotional Price" asp-for="PackagePrice">
+            </div>
+        </div>
+        <div class="form-row mt-4">
+            <div class="col">
+                <label for="">CV Downloads</label>
+                <input type="number" class="form-control" placeholder="CV Download Count" asp-for="CvDownloads">
+            </div>
+            <div class="col">
+                <label for="">Job Announcements</label>
+                <input type="number" class="form-control" placeholder="Enter Job Announcement Count" asp-for="JobAnnouncements">
+            </div>
+            <div class="col">
+                <label for="">Validity of Package (Days)</label>
+                <input type="number" class="form-control" placeholder="Enter Validity Days" asp-for="Validity">
+            </div>
+        </div>
+        <div class="form-row mt-4">
+            <div class="col">
+                <label for="">Start Date</label>
+                <input type='date' class="form-control" id='startDate' asp-for="StartDate" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}[0-9]{2}" value="@DateTime.Now.ToString("yyyy-MM-dd")" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            </div>
+            <div class="col">
+                <label for="">End Date</label>
+                <input type='date' class="form-control" id='endDate' asp-for="EndDate" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}[0-9]{2}" value="@DateTime.Now.ToString("yyyy-MM-dd")" min="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Add Promotion</button>
+        <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+    </div>
+</form>

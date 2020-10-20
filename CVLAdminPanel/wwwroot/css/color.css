@@ -1,0 +1,90 @@
+﻿.text-danger-company {
+    color:#e05476 !important;
+}
+
+.text-info-onhold {
+    color: #59a1bd !important;
+}
+
+.custom-color-error {
+    color :#921d0b;
+}
+
+.text-dark-light{
+    color: black;
+}
+
+.border-radius-0 {
+    border-radius: 0;
+}
+
+.custom-from-to {
+    color: black;
+    border-radius: 0;
+    font-weight:600;
+}
+.error-details-color {
+    color: #7f5252
+}
+.c-hr-green {
+    margin-bottom: .25rem;
+    border-top: 1px solid #daf1a3;
+}
+
+.c-hr-gray {
+    margin-bottom: .25rem;
+    border-top: 1px solid #ccc;
+}
+
+.c-b-white {
+    background: #fff;
+}
+
+.c-b-white-1 {
+    background: #efefef;
+}
+
+.custom-table {
+    background-color: #00adef;
+    color: #fff;
+}
+
+.custom-table-admin {
+    background-color: #daf1a3
+}
+
+.custom-table-error {
+    background-color: #db577a;
+    color: #fff;
+}
+
+.custom-table-user-1 {
+    color: #b7ab98;
+    background-color: #070e1b;
+}
+
+.custom-table-vet {
+    background-color: #fbe39a
+}
+
+.custom-table-mapping {
+    background-color: #8cb1bd
+}
+
+.custom-table-course {
+    background-color: #dedede
+}
+
+.btn-custom-style {
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.btn-delete-company .close > i {
+    color: #ce0202cf;
+    font-size: 1rem;
+}
+
+.text-success {
+    color: #00d271 !important;
+}

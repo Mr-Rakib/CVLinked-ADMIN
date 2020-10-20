@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.Notification>
+
+@{
+    ViewBag.Title = "Notifications";
+    ViewBag.HeaderTitle = "Nofification";
+}
+
+<div class=" row  pb-2">
+    <div class="text-left col-md-6 pr-2">
+        <h2 class="font-weight-normal"><i class="fas fa-list p-1 "></i>NOTIFICATIONS</h2>
+    </div>
+    <div class=" text-right col-md-6">
+        <form method="get" asp-action="" asp-controller="Log" asp-route-fromDate="dateTime.value" asp-route-toDate="dateTime.value" class=" form-row pb-2 ">
+
+            <input class="label col-md-1 form-control text-center  bg-white" value="FROM" disabled />
+            <input class="form-control col-md-4 text-center border-radius-0" type="date" name="fromDate" value=@DateTime.Now.ToString("yyyy-MM-dd")>
+
+            <input class="label col-md-1 form-control text-center bg-white" value="TO" disabled />
+            <input class="form-control col-md-4 text-center border-radius-0" type="date" name="toDate" value=@DateTime.Now.ToString("yyyy-MM-dd")>
+
+            <button type="submit" class="btn custom-table col-md-2 border-radius-0">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="Company-List-View ">
+    <div class="table-responsive">
+        <table class="display table table-bordered" id="individual_search_table" width="100%">
+            <thead class="custom-table">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.createDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.notificationType)</th>
+                    <th>@Html.DisplayNameFor(model => model.releventId)</th>
+                    <th>@Html.DisplayNameFor(model => model.idType)</th>
+                    <th>@Html.DisplayNameFor(model => model.text)</th>
+                    <th>@Html.DisplayNameFor(model => model.isRead)</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.createDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.notificationType)</th>
+                    <th>@Html.DisplayNameFor(model => model.releventId)</th>
+                    <th>@Html.DisplayNameFor(model => model.idType)</th>
+                    <th>@Html.DisplayNameFor(model => model.text)</th>
+                    <th>@Html.DisplayNameFor(model => model.isRead)</th>
+                </tr>
+            </tfoot>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr onclick="location.href='/Notification/FindById/@item.notificationId'" style="cursor: pointer;">
+                        <td>@item.notificationType</td>
+                        <td>@item.createDate.ToString("MMMM dd, yyyy hh:mm:ss tt")</td>
+                        <td>@item.releventId</td>
+                        <td>@item.idType</td>
+                        <td>@item.text</td>
+                        <td>@item.isRead</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<style>
+    td {
+        max-width: 210px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>

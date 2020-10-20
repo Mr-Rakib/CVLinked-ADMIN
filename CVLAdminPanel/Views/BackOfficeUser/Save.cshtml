@@ -1,0 +1,83 @@
+﻿@model CVLAdminPanel.Models.Model.BackOfficeUser
+
+@{
+    ViewData["HeaderTitle"] = "CREATE NEW BACK-OFFICE  USER";
+    ViewData["Title"] = "Add  Back Office User";
+    var roles = new UserRoleService().FindAll().FindAll(u => u.roleName.ToLower() != Roles.Admin);
+}
+
+<div class="Company-List-View">
+    <form method="post" asp-action="Save" asp-controller="BackOfficeUser">
+        <div class="modal-header">
+            <label class="h4"><i class="fas fa-plus-square"></i>&nbsp; CREATE NEW USER</label>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="col-md-4">
+                    <label>First Name</label>
+                    <input asp-for="personalInformation.firstName" class="form-control" placeholder="First Name" required />
+                </div>
+                <div class="col-md-4">
+                    <label>Last Name</label>
+                    <input asp-for="personalInformation.lastName" class="form-control" placeholder="Last Name" required />
+                </div>
+                <div class="col-md-4">
+                    <label>Role</label>
+                    <select asp-for="role.roleName" class="form-control " placeholder="E-mail" required>
+                        <option>Select Role</option>
+                        @foreach (var role in roles)
+                        {
+                            <option value="@role.roleName">@role.roleName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row mt-4">
+                <div class="col-md-4">
+                    <label>E-mail</label>
+                    <input asp-for="email" class=" form-control" placeholder="E-mail" required />
+                </div>
+                <div class="col-md-4">
+                    <label>Contact</label>
+                    <input asp-for="phoneNo" class=" form-control" placeholder="Contact Number" required />
+                </div>
+                <div class="col-md-2">
+                    <label>Gender</label>
+                    <select asp-for="personalInformation.gender" class="form-control " placeholder="Gender" required>
+                        <option>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <div >
+                        <label></label>
+                    </div>
+                    <div class="custom-control custom-checkbox text-center mt-3">
+                        <input checked="checked" class="custom-control-input" data-val="true" data-val-required="The Is Active? field is required." asp-for="isActive" type="checkbox" value="true">
+                        <label class="custom-control-label" for="isActive">Is Active? </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row mt-4">
+                <div class="col-md-4">
+                    <label>Date of Birth</label>
+                    <input type='date' asp-for="personalInformation.dateOfBirth" class="form-control" id='startDate' value="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                </div>
+                <div class="col-md-8">
+                    <label for="">Address</label>
+                    <input type='text' class="form-control" asp-for="personalInformation.address" placeholder="Address" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+        </div>
+    </form>
+</div>

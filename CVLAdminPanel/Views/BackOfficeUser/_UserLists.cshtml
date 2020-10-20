@@ -1,0 +1,79 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.BackOfficeUser>
+
+@{
+    int index = 1;
+}
+
+<div class="table-responsive">
+    <table class="display table table-bordered" id="employer_table" width="100%">
+        <thead class="custom-table">
+            <tr>
+                <th>SL</th>
+                <th>Full Name</th>
+                <th>@Html.DisplayNameFor(model => model.role.roleName)</th>
+                <th>@Html.DisplayNameFor(model => model.email)</th>
+                <th>@Html.DisplayNameFor(model => model.phoneNo)</th>
+                <th>@Html.DisplayNameFor(model => model.isActive)</th>
+                <th>@Html.DisplayNameFor(model => model.lastLoginDate) </th>
+                <th>@Html.DisplayNameFor(model => model.confirmedEmail)</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <span class="font-weight-bolder">
+                                @(index++)
+                            </span>
+                        </td>
+                        <td data-toggle="modal" data-target="#details-backoffice-user" data-id="@item.loginId" style="cursor: pointer;">
+                            @if (item.personalInformation == null)
+                            {
+                                <label>N/A</label>
+                            }
+                            else
+                            {
+                                <label>@string.Concat(item.personalInformation.firstName, " ", item.personalInformation.lastName)</label>
+                            }
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.role.roleName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.email)</td>
+                        <td>@Html.DisplayFor(modelItem => item.phoneNo)</td>
+                        <td>
+                            @{ if (item.isActive)
+                                {
+                                    <a title="Active" class="btn btn-white btn-sm" asp-action="ChangeActiveStatus" asp-controller="BackOfficeUser" asp-route-loginId="@item.loginId" asp-route-isActive="@item.isActive" onclick="return DeactiveConfirmation()">
+                                        <i class="fa fa-check text-success"></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a title="Deactive" class="btn btn-white btn-sm" asp-action="ChangeActiveStatus" asp-controller="BackOfficeUser" asp-route-loginId="@item.loginId" asp-route-isActive="@item.isActive" onclick="return DeactiveConfirmation()">
+                                        <i class="fa fa-times text-danger"></i>
+                                    </a>
+                                }
+                            }
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.lastLoginDate)</td>
+                        <td>
+                            @{ if (item.confirmedEmail)
+                                { <i class="fa fa-check text-success"></i>}
+                                else
+                                {<i class="fa fa-times text-danger"></i>}
+                            }
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a asp-action="Update" asp-controller="BackOfficeUser" asp-route-id="@item.loginId"><i class="fas fa-user-edit text-default p-1"></i></a>
+                                @*<button class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="BackOfficeUser" asp-route-id="@item.loginId"><i class="fa fa-trash-alt text-white p-1"></i></button>*@
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

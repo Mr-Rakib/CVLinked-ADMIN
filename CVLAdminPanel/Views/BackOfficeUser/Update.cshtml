@@ -1,0 +1,89 @@
+﻿@model CVLAdminPanel.Models.Model.BackOfficeUser
+
+@{
+    ViewData["HeaderTitle"] = "UPDATE BACK-OFFICE  USER";
+    ViewData["Title"] = "Update  Back Office User";
+    var roles = new UserRoleService().FindAll().FindAll(u => u.roleName.ToLower() != Roles.Admin);
+}
+
+<div class="Company-List-View">
+    <form method="post" asp-action="Update" asp-controller="BackOfficeUser">
+        
+        
+        <div class="modal-body">
+            <div class="form-row">
+
+                <input disable hidden asp-for="loginId" />
+                <input disable hidden asp-for="lastLoginDate" />
+                <input disable hidden asp-for="confirmedEmail" />
+
+                <div class="col-md-4">
+                    <label>First Name</label>
+                    <input asp-for="personalInformation.firstName" class="form-control" placeholder="First Name" required />
+                </div>
+                <div class="col-md-4">
+                    <label>Last Name</label>
+                    <input asp-for="personalInformation.lastName" class="form-control" placeholder="Last Name" required />
+                </div>
+                <div class="col-md-4">
+                    <label>Role</label>
+                    <select asp-for="role.roleId" class="form-control">
+                        <option >Select Role</option>
+                        @foreach (var role in roles)
+                        {
+                            <option value="@role.roleId">@role.roleName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row mt-4">
+                <div class="col-md-4">
+                    <label>E-mail</label>
+                    <label type="text" asp-for="email" class=" form-control" placeholder="Contact Number" required disabled>@Model.email</label>
+                    <input asp-for="email" class="form-control" placeholder="E-mail" required hidden />
+                </div>
+                <div class="col-md-4">
+                    <label>Contact</label>
+                    <label type="text" asp-for="phoneNo" class=" form-control" placeholder="Contact Number" required disabled>@Model.phoneNo</label>
+                    <input asp-for="phoneNo" class="form-control" placeholder="Contact Number" required hidden />
+                </div>
+                <div class="col-md-2">
+                    <label>Gender</label>
+                    <select asp-for="personalInformation.gender" class="form-control">
+                        <option >Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <div>
+                        <label></label>
+                    </div>
+                    <div class="custom-control custom-checkbox text-center mt-3">
+                        <input class="custom-control-input" data-val-required="The Is Active? field is required." asp-for="isActive" type="checkbox" disabled>
+                        <label class="custom-control-label" for="isActive">Is Active? </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row mt-4">
+                <div class="col-md-4">
+                    <label>Date of Birth</label>
+                    <input type='date' asp-for="personalInformation.dateOfBirth" class="form-control" id='startDate' value="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+                </div>
+                <div class="col-md-8">
+                    <label for="">Address</label>
+                    <input type='text' class="form-control" asp-for="personalInformation.address" placeholder="Address" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a class="btn btn-danger" asp-action="Index" asp-controller="BackOfficeUser">Cancel</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,150 @@
+﻿@model CVLAdminPanel.Models.Model.BackOfficeUser
+@{
+    string FullName = "Not Set";
+    if (Model.personalInformation != null)
+    {
+        FullName = string.Concat(Model.personalInformation.firstName, " ", Model.personalInformation.lastName);
+    }
+}
+<div class="modal-content">
+    <div class="modal-body">
+        <div class="col-lg-12">
+            <div class="row mb-2">
+                <h2 class="col-md-12 text-primary">
+                    @(FullName == "" ? "Not Set" : FullName)
+                    @{ if (Model.confirmedEmail)
+                        {
+                            <i class="fa fa-check-circle text-success"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-times-circle text-danger"></i>
+                        }
+                    }
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </h2>
+            </div>
+
+            <div class="row ">
+                <div class="form-group col-md-8 pl-2">
+                    <div class="form-row pl-2">
+                        <label class="col-md-12">
+                            <i class="far fa-id-badge"></i>
+                            @(Model.phoneNo == "" ? "Not Set" : Model.phoneNo)
+                        </label>
+                        <label class=" col-md-12">
+                            <i class="fas fa-envelope-open-text"></i>
+                            @(Model.email == "" ? "Not Set" : Model.email)
+                        </label>
+                        <label class="col-md-12">
+                            <i class="far fa-address-card"></i>
+                            @{
+                                if (Model.personalInformation != null)
+                                {
+                                    <label>@(Model.personalInformation.address == "" ? "Not Set" : Model.personalInformation.address)</label>
+                                }
+                                else
+                                {
+                                    <label>Not Set</label>
+                                }
+                            }
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <label class=" h5 text-center p-2 text-white col-md-12 bg-primary">Personal Information</label>
+
+            <div class="form-row custom-border-top pt-3">
+                <div class="form-group col-md-6">
+                    <div class="form-row  cal-md-12 p-1">
+                        <label class="col-md-5" asp-for="@Model.role.roleName"></label>
+                        <label class="col-md-7 ">
+                            <label>
+                                @(Model.role.roleName == null ? "Not Set" : Model.role.roleName)
+                            </label>
+                        </label>
+
+                        <label class="col-md-5" asp-for="@Model.personalInformation.gender"> </label>
+                        <label class="col-md-7 ">
+                            @{
+                                if (Model.personalInformation != null)
+                                {
+                                    <label>@(Model.personalInformation.gender == "" ? "Not Set" : Model.personalInformation.gender)</label>
+                                }
+                                else
+                                {
+                                    <label>Not Set</label>
+                                }
+                            }
+                        </label>
+
+                        <label class="col-md-5" asp-for="@Model.personalInformation.dateOfBirth"> </label>
+                        <label class="col-md-7 ">
+                            @{
+                                if (Model.personalInformation != null)
+                                {
+                                    <label>@((Model.personalInformation.dateOfBirth.HasValue) ? "Not Set" : Model.personalInformation.dateOfBirth.Value.ToString("MMMM, dd yyyy hh:mm:"))</label>
+                                }
+                                else
+                                {
+                                    <label>Not Set</label>
+                                }
+                            }
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <div class="form-row  cal-md-12 p-1">
+                        <label class="col-md-5" asp-for="@Model.isActive"> </label>
+                        <label class="col-md-7 ">
+                            @{
+                                if (Model.isActive)
+                                {
+                                    <i class="fa fa-check-circle text-success"></i>
+                                    <label class="text-success"> Active </label>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-times-circle text-danger"></i>
+                                    <label class="text-danger"> Deactive </label>
+                                }
+                            }
+                        </label>
+
+                        <label class="col-md-5" asp-for="@Model.confirmedEmail"> </label>
+                        <label class="col-md-7 ">
+                            @{
+                                if (Model.confirmedEmail)
+                                {
+                                    <label class=""> Confirmed </label>
+                                }
+                                else
+                                {
+                                    <label class=""> Not Confirmed </label>
+                                }
+                            }
+                        </label>
+
+                        <label class="col-md-5" asp-for="@Model.lastLoginDate"> </label>
+                        <label class="col-md-7 ">
+                            @{
+                                if (Model.personalInformation != null)
+                                {
+                                    <label>@(! Model.lastLoginDate.HasValue ? "Not Set" : Model.lastLoginDate.ToString())</label>
+                                }
+                                else
+                                {
+                                    <label>Not Set</label>
+                                }
+                            }
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

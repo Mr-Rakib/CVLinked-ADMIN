@@ -1,0 +1,30 @@
+﻿@model CVLAdminPanel.Models.Model.Company
+@{
+    string phone = !string.IsNullOrEmpty(Model.companyContactNo) ? Model.companyContactNo :
+                    !string.IsNullOrEmpty(Model.contactPerson.contactPersonMobile) ? Model.contactPerson.contactPersonMobile :
+                    !string.IsNullOrEmpty(Model.supportEmail) ? Model.supportEmail : "Not Set";
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="">
+            <h3><i class="far fa-paper-plane text-default"></i> Send SMS to <b>@Model.companyName</b></h3>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form method="post" asp-action="SendSms" asp-controller="Company">
+            <div class="form-group">
+                <label for="FormControlInputEmail">Recipient</label>
+                @*@Html.TextBox("receiver", "8801678200124", new { @class = "form-control", @required = "required", @readonly = "readonly" })*@
+                @Html.TextBox("receiver", phone, new { @class = "form-control bg-white", @required = "required", @readonly = "readonly" })
+            </div>
+            <div class="form-group">
+                <label for="FormControlTextareaContent">SMS Body</label>
+                @Html.TextArea("smsContent", "Dear " + @Model.companyName + ",", new { @class = "form-control", @required = "required" })
+            </div>
+            <input type="submit" class="btn btn-primary" />
+        </form>
+    </div>
+</div>

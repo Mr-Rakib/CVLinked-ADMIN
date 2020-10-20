@@ -1,0 +1,70 @@
+﻿@{
+    var value = new NotificationService().FindAll(User.FindFirst("access_token").Value);
+    int unread = value.FindAll(n => n.isRead == false).Count();
+}
+<nav class="navbar navbar-top navbar-expand-md navbar-dark bg-gradient-primary" id="navbar-main">
+    <div class="container-fluid">
+        <!-- Brand Header Text -->
+        <span class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">@ViewBag.HeaderTitle</span>
+        <!-- Form -->
+        <!-- User -->
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
+            <li class="nav-item dropdown">
+                <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="media align-items-center">
+                        <span class="avatar avatar-sm rounded-circle">
+                            <i class="fas fa-bell"></i>
+                        </span>
+                        <div class="ml-1 d-none d-lg-block">
+                            <span class="mb-0 text-white font-weight-bold">@unread</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right custom-notification">
+                    <div class=" dropdown-header noti-title">
+                        <h6 class="text-overflow m-0 text-info">Notifications </h6>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    @foreach (var item in value)
+                    {
+                        <a class="dropdown-item text-dark-light" asp-action="Handler" asp-controller="Notification" asp-route-notificationId="@item.notificationId" asp-route-notificationType="@item.notificationType" asp-route-releventId="@item.releventId">
+                            <svg>
+                                <g class="circle">
+                                    <circle r="5" cx="6" cy="6">
+                                </g>
+                            </svg>
+                            @item.text
+                        </a>
+                    }
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="media align-items-center">
+                        <span class="avatar avatar-sm rounded-circle">
+                            <img alt="Image placeholder" src="~/Content/img/icons/userlogo.png" />
+                        </span>
+                        <div class="media-body ml-2 d-none d-lg-block">
+                            <span class="mb-0 text-sm  font-weight-bold">@User.Identity.Name</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                    <div class=" dropdown-header noti-title">
+                        <h6 class="text-overflow m-0">@Context.User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</h6>
+                    </div>
+                    <a asp-action="ChangePassword" asp-controller="Settings" class="dropdown-item"><i class="fas fa-key"></i>Change Password</a>
+                    <label class="dropdown-item text-dark-light" id="theme-changer" onclick="ChangeTheme()"><i class='fas fa-retweet'></i> Dark Mode</label>
+                    <div class="dropdown-divider"></div>
+                    <a asp-action="Logout" asp-controller="Login" class="dropdown-item text-danger">
+                        <i class="ni ni-user-run"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+
+    </div>
+</nav>

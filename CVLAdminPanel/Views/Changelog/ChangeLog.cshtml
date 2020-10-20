@@ -1,0 +1,119 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.ChangeLog>
+
+@{
+    ViewData["Title"] = "CHANGE LOG";
+    ViewData["HeaderTitle"] = "CHANGE LOG";
+    int index = 0;
+}
+<div class="row pb-2">
+    <div class="text-left col-md-6">
+        <h2 class="font-weight-normal"><i class="fas fa-user-clock"></i> &nbsp; @ViewBag.Title</h2>
+    </div>
+    <div class=" text-right col-md-6">
+        <a class="btn btn-primary" onclick="return VerificationConfirmation() " asp-action="Verify" asp-controller="Verification" asp-route-jobseekerId="@TempData["Verification-On-Hold-User-Id"]">Verify</a>
+    </div>
+</div>
+
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="Company-List-View">
+            <div class="table-responsive">
+                <table class="display table table-bordered" id="employer_table" width="100%">
+                    <thead class="custom-table">
+                        <tr>
+                            <th>
+                                SL
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Object)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ChangeType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Approved)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+                            foreach (var item in Model)
+                            {
+                                var jsonPrettyValue = JValue.Parse(item.Description).ToString(Formatting.Indented);
+                                <tr>
+                                    <td>
+                                        @(++index)
+                                    </td>
+                                    <td>
+                                        @item.Date.ToString("dd MMMM, yyyy  hh:mm:ss tt")
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Object)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ChangeType)
+                                    </td>
+                                    <td>
+                                        @{ if (item.Approved)
+                                            {
+                                                <label class="text-success">Approved</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="text-danger">Not Approved</label>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="form-row">
+                                            <div class="col-md-10">@item.ChangeType the @item.Object</div>
+                                            <a title="Details" class="btn btn-sm" onclick="JsonDescriptionView(@index)"><i class="fas fa-info-circle text-info"></i></a>
+
+                                        </div>
+                                        <textarea readonly id="change-log-json-value-@index">@jsonPrettyValue</textarea>
+                                    </td>
+
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            @if (!item.Approved) 
+                                            {
+                                                <a title="Verify" class="btn btn-sm btn-info" onclick="return ApproveConfirmation() " asp-action="ApproveChangeLog" asp-controller="ChangeLog" asp-route-changeLogId="@item.ChangeLogId" asp-route-userId="@item.UserId">Approve</a>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-check text-success"></i>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    textarea {
+        display: none;
+        min-width: 30rem;
+        min-height: 25rem;
+        border-color: #fff;
+        border-top: 1px solid #acd0d6;
+        color: inherit;
+        margin-top: 5px;
+    }
+</style>

@@ -1,0 +1,103 @@
+﻿@model CVLAdminPanel.Models.Model.CVSummaryCollection
+
+@{
+    ViewData["Title"] = "VERIFICATION ON HOLD";
+    ViewData["HeaderTitle"] = "VERIFICATION ON HOLD";
+    int index = 1;
+}
+<div class="row pb-2">
+    <div class="text-left col-md-6">
+        <h2 class="font-weight-normal"><i class="fas fa-user-clock"></i> &nbsp; @ViewBag.Title</h2>
+    </div>
+    <div class=" text-right col-md-6">
+        @*<a class="btn btn-primary" asp-action="Save" asp-controller="BackOfficeUser">+ Add New Back Office User</a>*@
+    </div>
+</div>
+
+
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="Company-List-View">
+            <div class="table-responsive">
+                <table class="display table table-bordered" id="employer_table" width="100%">
+                    <thead class="custom-table">
+                        <tr>
+                            <th>SL</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Status</th>
+                            <th>IsVerified</th>
+                            <th>Profile Percent</th>
+                            <th>Last Login Date</th>
+                            <th>Last Update Date</th>
+                            <th>Create Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model.CVs)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="font-weight-bolder">
+                                            @(index++)
+                                        </span>
+                                    </td>
+                                    <td data-toggle="modal" data-target="#details-backoffice-user" data-id="@item.LoginId" style="cursor: pointer;">
+                                        @if (string.IsNullOrEmpty(item.FirstName) && string.IsNullOrEmpty(item.LastName))
+                                        {
+                                            <label>N/A</label>
+                                        }
+                                        else
+                                        {
+                                            <label>@string.Concat(item.FirstName, " ", item.LastName)</label>
+                                        }
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PhoneNo)</td>
+                                    <td>
+                                        @{ if (item.Status)
+                                            {
+                                                <i class="fa fa-check text-success"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-times text-danger"></i>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @{ if (item.Verified)
+                                            {
+                                                <i class="fa fa-check text-success"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-times text-danger"></i>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>@Html.DisplayFor(modelItem => item.ProfilePercent)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.LastLoginDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.LastUpdateDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CreateDate)</td>
+
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a class="btn btn-sm" asp-action="ChangeLog" asp-controller="ChangeLog" asp-route-id="@item.LoginId"><i class="fab fa-stack-exchange text-info p-1"></i></a>
+                                            @*<button class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="BackOfficeUser" asp-route-id="@item.loginId"><i class="fa fa-trash-alt text-white p-1"></i></button>*@
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

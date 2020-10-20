@@ -1,0 +1,24 @@
+﻿@model CVLAdminPanel.Models.Model.Promotion
+<!--Delete Modal-->
+<div>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-title-notification">Your attention is required</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="py-3 text-center">
+            <i class="fas fa-question-circle fa-3x"></i>
+            <h4 class="heading mt-4">Are you sure want to delete!</h4>
+            <p>If You delete this promotion, you can't able to get this ever.</p>
+        </div>
+    </div>
+    <form asp-action="DeletePromotions" asp-controller="PromotionalOffer" method="post">
+        <div class="modal-footer">
+            <input type="hidden" asp-for="@Model.PromotionId" class="form-control" value="@Model.PromotionId">
+            <input type="submit" class="btn btn-success" value="Yes, Delete it" />
+            <button type="button" class="btn text-white ml-auto btn-danger" data-dismiss="modal">No, Thanks</button>
+        </div>
+    </form>
+</div>

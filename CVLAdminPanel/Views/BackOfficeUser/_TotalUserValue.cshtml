@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.BackOfficeUser>
+
+@{ 
+    int Admin = Model.Where(a => string.Equals(a.role.roleName, Roles.Admin, StringComparison.OrdinalIgnoreCase)).Count();
+    int Supervisor = Model.Where(a => string.Equals(a.role.roleName, Roles.Supervisor, StringComparison.OrdinalIgnoreCase)).Count();
+    int Salesman = Model.Where(a => string.Equals(a.role.roleName, Roles.Salesman, StringComparison.OrdinalIgnoreCase)).Count();
+    int CallCenterAgent = Model.Where(a => string.Equals(a.role.roleName, Roles.CallCenterAgent, StringComparison.OrdinalIgnoreCase)).Count();
+}
+
+<div class="row mb-3">
+
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-1">@Roles.Admin</h5>
+                        <span class="h2 font-weight-bold mb-0 ">
+                            @Admin
+                        </span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-1">@Roles.Supervisor</h5>
+                        <span class="h2 font-weight-bold mb-0 ">
+                            @Supervisor
+                        </span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-1">@Roles.Salesman</h5>
+                        <span class="h2 font-weight-bold mb-0 ">
+                            @Salesman
+                        </span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-1">@Roles.CallCenterAgent</h5>
+                        <span class="h2 font-weight-bold mb-0 ">
+                            @CallCenterAgent
+                        </span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-pink text-white rounded-circle shadow">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+</div>

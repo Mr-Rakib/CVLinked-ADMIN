@@ -1,0 +1,90 @@
+﻿
+.custom-card-d {
+    background: #000a1ded;
+    color: #ffe1a5;
+}
+
+.custom-card-d-1 {
+    background: #ffffff;
+    color: #000a1ded;
+}
+
+.custom-card-yellow {
+    background: #ffd37a;
+    color: #000a1ded;
+}
+.custom-card-yellow-light {
+    background: #f1e9c3;
+    color: #000a1ded;
+}
+
+.custom-card-green {
+    background: #95d08d;
+    color: #000a1ded;
+}
+.custom-card-green-light {
+    background: #549a94;
+    color: #f1e9c3;
+}
+.custom-card-orange {
+    background: #ffb365;
+    color: #000a1ded;
+}
+.custom-card-orange-light {
+    background: #d6a28a;
+    color: #000a1ded;
+}
+.custom-card-orange-lighter {
+    background: #b7ab98;
+    color: #000a1ded;
+}
+
+
+.custom-card-skyblue-light {
+    background: #89c7ca;
+    color: #000a1ded;
+}
+
+.custom-card-skyblue {
+    background: #057d91;
+    color: #f1e9c3;
+}
+
+
+.custom-card-red {
+    background: #8d3232ed;
+    color: #f1e9c3;
+}
+
+.custom-card-admin {
+    background: #9a2b2b;
+}
+
+.custom-card-staff {
+    background: #de8921;
+}
+
+.custom-card-student {
+    background: #2b9a7b;
+}
+
+.custom-card-mission {
+    background-color: #b24444
+}
+
+.custom-card-peo {
+    background-color: #1d9a69
+}
+
+.custom-card-plo {
+    background-color: #b96d4b
+}
+
+.custom-card-clo {
+    background-color: #146f8c
+}
+
+.Company-List-View {
+    background: #FFF;
+    padding: 20px;
+}

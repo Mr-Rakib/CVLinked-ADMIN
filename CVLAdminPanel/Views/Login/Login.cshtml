@@ -1,0 +1,59 @@
+﻿@model CVLAdminPanel.Models.Model.Login
+@Html.Partial("_LoginHeader")
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="container pb-5">
+    <div class=" row justify-content-center ">
+        <div class="col-lg-5 col-md-7 ">
+            <div class="card bg-secondary shadow border-0 ">
+                <div class="card-header bg-transparent pb-5 pt-5 text-center ">
+                    <img src="@Url.Content("~/Content/img/brand/logo.png")" class="login-logo-img " alt="... ">
+                </div>
+
+                <div class="container-fluid">
+                    @Html.Partial("Notification/_notificationView")
+                </div>
+
+                <div class="card-body px-lg-5 py-lg-5 ">
+
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group mb-3 ">
+                            <div class="input-group input-group-alternative ">
+                                <div class="input-group-prepend ">
+                                    <span class="input-group-text "><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="email" asp-for="@Model.UserName" class="form-control login-input" placeholder="Username" required />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="input-group input-group-alternative ">
+                                <div class="input-group-prepend ">
+                                    <span class="input-group-text "><i class="fas fa-lock"></i></span>
+                                </div>
+                                <input id="show_hide_password" type="password" asp-for="@Model.Password" class="form-control login-input" placeholder="Password" required />
+                                <i onclick="TogglePassword()" class="fa fa-fw fa-eye-slash field-icon toggle-password m-3 "></i>
+                            </div>
+                        </div>
+                       
+                        <div class="text-center ">
+                            <button type="submit" class="btn btn-primary my-4 btn-block ">Sign in</button>
+                            <a asp-controller="Settings" asp-action="Forgetpassword" class="text-info "><small>Forgot password?</small></a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="row mt-3 ">
+                <div class="col-6 ">
+                    @*<a href="# " class="text-light "><small>Forgot password?</small></a>*@
+                </div>
+                <div class="col-6 text-right ">
+                    @*<a href="# " class="text-light "><small>Create new account</small></a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

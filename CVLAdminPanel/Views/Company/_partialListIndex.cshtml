@@ -1,0 +1,122 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.Company>
+
+@{
+    ViewBag.HeaderTitle = "EMPLOYER DETAILS";
+}
+
+
+<div class="table-responsive">
+    <table class="display table table-bordered" id="employer_table" width="100%">
+        <thead class="custom-table">
+            <tr>
+                <th>Company name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Registration Date</th>
+                <th>Email Conifmed</th>
+                <th>Contact Person</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tfoot>
+            <tr>
+                <th>Company name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Registration Date</th>
+                <th>Email Conifmed</th>
+                <th>Contact Person</th>
+                <th></th>
+            </tr>
+        </tfoot>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                string phone = (string.IsNullOrEmpty(item.companyContactNo) && string.IsNullOrEmpty(item.contactPerson.contactPersonMobile) && string.IsNullOrEmpty(item.registeredPhoneNo))
+                    ? "" : item.registeredPhoneNo == "" ? item.contactPerson.contactPersonMobile : item.registeredPhoneNo;
+
+                <tr>
+                    <td class="text-left pl-2">
+                        <div class="row">
+                            <label class="col-md-4">
+                                @if (string.IsNullOrEmpty(item.companyLogoName))
+                                {
+                                    <img src="~/Content/img/brand/logo.png" class="company-logo" />
+                                }
+                                else
+                                {
+                                    <img class="company-logo" src="https://s3.ap-south-1.amazonaws.com/cvlinked/CorporateLogos/@Html.DisplayFor(modelItem => item.companyLogoName)" />
+                                }
+                                &nbsp;
+                            </label>
+                            <a class="text-default font-weight-600 col-md-8" asp-action="Details" asp-controller="Company" asp-route-id="@item.employerId">
+                                @(string.IsNullOrEmpty(item.companyName) ? "N/A" : item.companyName)
+                            </a>
+                        </div>
+                    </td>
+                    <td>@(string.IsNullOrEmpty(item.companyContactNo) ? "N/A" : item.companyContactNo )<br /></td>
+                    <td>@(string.IsNullOrEmpty(item.email) ? "N/A" : item.email )<br /></td>
+                    <td>
+                        @item.registeredDate.ToString("yyyy-MM-dd")<br />
+                        @item.registeredDate.ToString("H:mm:ss")
+                    </td>
+                    <td>
+                        @{if (item.confirmedEmail)
+                            {
+                                <i class="fa fa-check text-success"></i>
+                                <h6 class="text-success">YES</h6>
+                            }
+                            else
+                            {
+                                <i class="fa fa-times text-danger"></i>
+                                <h6 class="text-danger">NO</h6>
+                            }
+                        }
+                    </td>
+
+                    <td class="text-left pl-2">
+                        <h5 class="text-default ">
+                            @(item.contactPerson.contactPersonName == null ? "N/A" : item.contactPerson.contactPersonName)
+                        </h5>
+
+                        <h6 class="font-weight-normal text-default mr-2">
+                            <span class="text-default mr-2 media align-items-center">
+                                <i class="fas fa-user-tie" style="color: #b95d6f"></i>&nbsp;
+                                @(string.IsNullOrEmpty( item.contactPerson.contactPersonDesignation) ? "N/A" : item.contactPerson.contactPersonDesignation)
+                            </span>
+                        </h6>
+                        <h6 class="font-weight-normal text-default mr-2 ">
+                            <span class="text-default mr-2 media align-items-center">
+                                <i class="fas fa-phone-alt" style="color: #59d8a2"></i> &nbsp;
+                                @(string.IsNullOrEmpty( item.contactPerson.contactPersonMobile)? "N/A" : item.contactPerson.contactPersonMobile)
+                            </span>
+                        </h6>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-cogs text-primary"></i>
+                            </button>
+                            <div class="dropdown-menu container" aria-labelledby="dropdownMenuButton">
+                                <button title="Send Email" type="button" class="dropdown-item btn btn-pink btn-sm" data-toggle="modal" data-target="#company-email-modal" data-id="@item.employerId"><i class="fas fa-paper-plane text-default"></i> Send Email</button>
+                                @if (item.confirmedEmail)
+                                {
+                                    @if (!string.IsNullOrEmpty(phone))
+                                    {
+                                        <button title="Send SMS" type="button" class="dropdown-item  btn btn-pink btn-sm" data-toggle="modal" data-target="#sms-modal" data-id="@item.employerId"><i class="fas fa-comments text-warning"></i> Send SMS</button>
+                                    }
+                                    <a title="Profile" type="button" class=" dropdown-item  btn btn-pink btn-sm" asp-action="Details" asp-controller="Company" asp-route-id="@item.employerId"><i class="fas fa-eye text-success"></i> Profile</a>
+                                }
+                                <a onclick="return DeleteConfirmation()" title="Delete" class=" dropdown-item btn btn-pink btn-sm" asp-action="Delete" asp-controller="Company" asp-route-id="@item.employerId"><i class="fas fa-trash text-danger"></i> Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

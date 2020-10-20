@@ -1,0 +1,157 @@
+﻿@model CVLAdminPanel.Models.Model.Company
+
+@{
+    ViewData["Title"] = "BasicDetails";
+}
+
+<div class=" row pt-1">
+    <div class="text-left col-md-6">
+        <h2 class="font-weight-normal"><i class="fas fa-user-tie p-1 "></i>&nbsp; @Model.companyName</h2>
+    </div>
+
+    <div class=" text-right col-md-6">
+        <ul class="nav justify-content-end nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <div class="dropdown text-right">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-cogs text-primary"></i> &nbsp;Actions
+                    </button>
+                    <div class="dropdown-menu">
+                        <button title="Send Email" type="button" class="dropdown-item  btn btn-pink" data-toggle="modal" data-target="#company-email-modal" data-id="@Model.employerId"><i class="fas fa-paper-plane text-default"></i> Send Email</button>
+                        <button title="Send SMS" type="button" class="dropdown-item  btn btn-pink" data-toggle="modal" data-target="#sms-modal" data-id="@Model.employerId"><i class="fas fa-comments text-warning"></i> Send SMS</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="modal-content">
+    <div class="modal-body">
+        <div class="col-lg-12">
+
+            <div class="row mb-2">
+                <div class="form-group col-md-8 pl-2">
+                    <div class="form-row">
+                        <h2 class="col-md-8 text-primary">
+                            @(Model.companyName == "" ? "Not Set" : Model.companyName)
+                            @{ if (Model.confirmedEmail)
+                                { <i class="fa fa-check-circle text-success"></i>}
+                                else
+                                {<i class="fa fa-times-circle text-danger"></i>}
+                            }
+                        </h2>
+                        <label class="col-md-12">
+                            <i class="far fa-id-badge"></i>
+                            @(Model.companyContactNo == "" ? "Not Set" : Model.companyContactNo)
+                        </label>
+                        <label class=" col-md-12">
+                            <i class="fas fa-envelope-open-text"></i>
+                            @(Model.email == "" ? "Not Set" : Model.email)
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4 text-right">
+                    @if (string.IsNullOrEmpty(Model.companyLogoName))
+                    {
+                        <img src="~/Content/img/brand/logo.png" class="company-img" />
+                    }
+                    else
+                    {
+                        <img class="company-img" src="https://s3.ap-south-1.amazonaws.com/cvlinked/CorporateLogos/@Html.DisplayFor(modelModel => Model.companyLogoName)" />
+                    }
+                </div>
+            </div>
+
+            <label class=" h5 text-center p-2 text-white col-md-12 bg-primary">COMPANY INFORMATION</label>
+
+            <div class="form-row custom-border-top pt-3">
+                <div class="form-group col-md-6">
+                    <div class="form-row  cal-md-12 p-1">
+                        <label class="col-md-5" asp-for="@Model.registeredDate"></label>
+                        @if (Model.registeredDate != null)
+                        {
+                            <label class="col-md-7">@Model.registeredDate</label>
+                        }
+                        else
+                        {
+                            <label class="col-md-7">Not Set</label>
+                        }
+
+                        <label class="col-md-5" asp-for="@Model.lastLoginDate"></label>
+                        @if (Model.lastLoginDate != null)
+                        {
+                            <label class="col-md-7">@Model.lastLoginDate</label>
+                        }
+                        else
+                        {
+                            <label class="col-md-7">Not Set</label>
+                        }
+
+                        <label class="col-md-5" asp-for="@Model.confirmedEmail"></label>
+                        @{ if (Model.confirmedEmail)
+                            {
+                                <i class="fa fa-check text-success col-md-7"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-times text-danger col-md-7"></i>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="row p-2 border-top col-md-12">
+                    <div class="form-group col-md-6">
+                        <label class="h5 form-group text-center text-primary  border-bottom  pb-2" style="width:100%">CONTACT INFORMATION</label>
+
+                        <div class="form-row  cal-md-12 p-1">
+                            <label class="col-md-5" asp-for="@Model.registeredPhoneNo"> </label>
+                            <label class="col-md-7 "> @(Model.registeredPhoneNo == "" ? "Not Set" : Model.registeredPhoneNo)</label>
+
+                            <label class="col-md-5" asp-for="@Model.supportEmail"> </label>
+                            <label class="col-md-7 ">@(Model.supportEmail == "" ? "Not Set" : Model.supportEmail )</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 border-left">
+                        <label class="h5 form-group text-center text-primary border-bottom pb-2" style="width:100%">CONTACT PERSON</label>
+                        <div class="form-row  cal-md-12 p-1 ">
+                            <label class="col-md-5" asp-for="@Model.contactPerson.contactPersonName"> </label>
+                            <label class="col-md-7 ">@(Model.contactPerson.contactPersonName == "" ? "Not Set" : Model.contactPerson.contactPersonName)</label>
+
+                            <label class="col-md-5" asp-for="@Model.contactPerson.contactPersonDesignation"></label>
+                            <label class="col-md-7 "> @(Model.contactPerson.contactPersonDesignation == "" ? "Not Set" : Model.contactPerson.contactPersonDesignation)</label>
+
+                            <label class="col-md-5" asp-for="@Model.contactPerson.contactPersonMobile"></label>
+                            <label class="col-md-7 "> @(Model.contactPerson.contactPersonMobile  == "" ? "Not Set" : Model.contactPerson.contactPersonMobile)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!---Email Modal--->
+<div class="modal fade" id="company-email-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document" id="companyEmailModal">
+
+    </div>
+</div>
+<!---SMS Modal--->
+<div class="modal fade" id="sms-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document" id="companySmsModal">
+
+    </div>
+</div>
+<!---View Details Modal--->
+<div class="modal fade" id="view-details-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-" role="document" id="viewdetailsmodal">
+
+    </div>
+</div>
+

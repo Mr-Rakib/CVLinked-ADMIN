@@ -1,0 +1,110 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.Promotion>
+@{
+    ViewData["Title"] = "PROMOTIONAL OFFER";
+    ViewData["HeaderTitle"] = "Manage Promotional Offer";
+    ViewBag.Action = "Index";
+    ViewBag.Controller = "PromotionalOffer";
+}
+
+
+<div>
+    <div class="row pb-2">
+        <div class="text-left col-md-6">
+            <h2 class="font-weight-normal"><i class="fas fa-list p-1"></i>@ViewBag.Title</h2>
+        </div>
+        <div class=" text-right col-md-6">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#add-promotiona-modal">+ Add New Promotion</button>
+        </div>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="Company-List-View">
+                @Html.Partial("PromotionalOfferList")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Add Promotion Modal-->
+<div class="modal fade" id="add-promotiona-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-" role="document">
+        <div class="modal-content" id="promotioneAddModal">
+
+        </div>
+    </div>
+</div>
+
+<!--Edit Promotion Modal-->
+<div class="modal fade" id="edit-promotiona-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title-default">Update Promotion 1 <i class="fa fa-pen text-default p-1"></i></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="">Promotion ID</label>
+                            <input type="number" class="form-control" placeholder="Promotion ID" value="1">
+                        </div>
+                        <div class="col">
+                            <label for="">Package ID</label>
+                            <input type="number" class="form-control" placeholder="Package ID" value="1">
+                        </div>
+                        <div class="col">
+                            <label for="">Package Price</label>
+                            <input type="text" class="form-control" placeholder="Package Price" value="2475.00">
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="col">
+                            <label for="">CV Downloads</label>
+                            <input type="number" class="form-control" placeholder="CV Download" value="25">
+                        </div>
+                        <div class="col">
+                            <label for="">Job Announcements</label>
+                            <input type="number" class="form-control" placeholder="Enter Job Announcement Count" value="20">
+                        </div>
+                        <div class="col">
+                            <label for="">Validity of Package (Days)</label>
+                            <input type="number" class="form-control" placeholder="Enter Validity Days" value="30">
+                        </div>
+                    </div>
+                    <div class="form-row mt-4">
+                        <div class="col">
+                            <label for="">Start Date</label>
+                            <input type="date" class="form-control" placeholder="Start Date" value="10/11/2019">
+                        </div>
+                        <div class="col">
+                            <label for="">End Date</label>
+                            <input type="date" class="form-control" placeholder="End Date" value="10/01/2020">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Update Promotion</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--Delete Modal-->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-" role="document">
+        <div class="modal-content" id="promotionDeleteModal">
+
+        </div>
+    </div>
+</div>

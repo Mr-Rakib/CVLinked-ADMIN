@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.BackOfficeUser>
+
+@{
+    ViewData["Title"] = "BACK OFFICE USER";
+    ViewData["HeaderTitle"] = "Back Office User";
+    ViewBag.Action = "Index";
+    ViewBag.Controller = "BackOfficeUser";
+}
+
+<div>
+
+    @Html.Partial("_TotalUserValue", Model)
+
+    <div class="row pb-2">
+        <div class="text-left col-md-6">
+            <h3 class="font-weight-normal"><i class="fas fa-user"></i> &nbsp; @ViewBag.Title</h3>
+        </div>
+        <div class=" text-right col-md-6">
+            <a class="btn btn-primary" asp-action="Save" asp-controller="BackOfficeUser">+ Add New Back Office User</a>
+        </div>
+    </div>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="Company-List-View">
+                @Html.Partial("_UserLists", Model)
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!---View Details Modal--->
+<div class="modal fade" id="details-backoffice-user" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-" role="document" id="backofficeuserdetails">
+
+    </div>
+</div>

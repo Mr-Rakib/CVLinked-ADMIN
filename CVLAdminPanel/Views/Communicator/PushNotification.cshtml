@@ -1,0 +1,145 @@
+﻿@model CVLAdminPanel.Models.Model.PushNotification
+@{
+    ViewData["Title"] = "Push Notification";
+    ViewData["HeaderTitle"] = "Push Notification to JobSeeker";
+}
+@{
+    if (TempData["Value"] != null)
+    {
+    <div class="alert alert-success" role="alert">
+        @TempData["Value"]
+    </div>
+    }
+}
+
+
+<div class="nav-wrapper">
+    <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-all-tab" data-toggle="tab" href="#tabs-all" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-cloud-upload-96 mr-2"></i>ALL</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-individual-tab" data-toggle="tab" href="#tabs-individual" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="ni ni-bell-55 mr-2"></i>Individual</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-morethen60-tab" data-toggle="tab" href="#tabs-morethen60" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>60% +</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link mb-sm-3 mb-md-0" id="tabs-lessthan60-tab" data-toggle="tab" href="#tabs-lessthan60" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>0% to 59%</a>
+        </li>
+    </ul>
+</div>
+<div class="card shadow">
+    <div class="card-body">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="tabs-all" role="tabpanel" aria-labelledby="tabs-all-tab">
+                <div class="form-group">
+                    <label>Send Push Notification to All User</label>
+                </div>
+                @using (Html.BeginForm("SendNotificationToAll", "Communicator", FormMethod.Post))
+                {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label>Title</label>
+                    <div class="help-tip">
+                        <p>Every <b>Push Notification</b> has a title, which will be shown on top of the notification.</p>
+                    </div>
+                    @Html.TextBoxFor(a => a.Title, new {@type = "text", @class = "form-control", @placeholder = "Enter Title here", @required = "required" })
+                </div>
+                <div class="form-group">
+                    <label>Type Content</label>
+                    <div class="help-tip">
+                        <p>Write up your content here. You can write mini paragraph here. Please dont use long stories.</p>
+                    </div>
+                    @Html.TextAreaFor(a => a.Content, new { @class = "form-control", @placeholder = "Enter Notification Content here", @required = "required" })
+                </div>
+                <div class="form-group">
+                    <button href="#" class="btn btn-info btn-xs">Send Push Notification</button>
+                </div>
+                }
+            </div>
+            <div class="tab-pane fade" id="tabs-individual" role="tabpanel" aria-labelledby="tabs-individual-tab">
+                <div class="form-group">
+                    <label>Send Push Notification to Individual User</label>
+                </div>
+
+                @using (Html.BeginForm("SendIndividualNotification", "Communicator", FormMethod.Post))
+                {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label>Title</label>
+                    <div class="help-tip">
+                        <p>Every <b>Push Notification</b> has a title, which will be shown on top of the notification.</p>
+                    </div>
+                    @Html.TextBoxFor(a => a.Title, new {@type = "text", @class = "form-control", @placeholder = "Enter Title here", @required = "required" })
+                </div>
+                <div class="form-group">
+                    <label>Type Content</label>
+                    <div class="help-tip">
+                        <p>Write up your content here. You can write mini paragraph here. Please dont use long stories.</p>
+                    </div>
+                    @Html.TextAreaFor(a => a.Content, new { @class = "form-control", @placeholder = "Enter Notification Content here", @required = "required" })
+                </div>
+                <div class="form-group">
+                    <label>Recipient</label>
+                    <div class="help-tip">
+                        <p>Recipient means, <b>JobSeekers of CVLinked.</b> As recipient, you have to enter <b>Register Email Address</b> in the box. You can enter only 1(one) email address at a time.</p>
+                    </div>
+                    @Html.TextBoxFor(a => a.Recipient, new { @type = "text", @class = "form-control", @placeholder = "Type email address of JobSeeker", @required = "required" })
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info btn-xs">Send Push Notification</button>
+                </div>
+                }
+            </div>
+            <div class="tab-pane fade" id="tabs-morethen60" role="tabpanel" aria-labelledby="tabs-morethen60-tab">
+                <div class="form-group">
+                    <label>Send Push Notification to User (Profile (%) is more than 60)</label>
+                </div>
+                <form action="#">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <div class="help-tip">
+                            <p>Every <b>Push Notification</b> has a title, which will be shown on top of the notification.</p>
+                        </div>
+                        @Html.TextBoxFor(a => a.Title, new {@type = "text", @class = "form-control", @placeholder = "Enter Title here", @required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <label>Type Content</label>
+                        <div class="help-tip">
+                            <p>Write up your content here. You can write mini paragraph here. Please dont use long stories.</p>
+                        </div>
+                        @Html.TextAreaFor(a => a.Content, new { @class = "form-control", @placeholder = "Enter Notification Content here", @required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <button href="#" class="btn btn-info btn-xs">Send Push Notification</button>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="tabs-lessthan60" role="tabpanel" aria-labelledby="tabs-lessthan60-tab">
+                <div class="form-group">
+                    <label>Send Push Notification to User (Profile (%) in between 0 and 59)</label>
+                </div>
+                <form action="#">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <div class="help-tip">
+                            <p>Every <b>Push Notification</b> has a title, which will be shown on top of the notification.</p>
+                        </div>
+                        @Html.TextBoxFor(a => a.Title, new {@type = "text", @class = "form-control", @placeholder = "Enter Title here", @required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <label>Type Content</label>
+                        <div class="help-tip">
+                            <p>Write up your content here. You can write mini paragraph here. Please dont use long stories.</p>
+                        </div>
+                        @Html.TextAreaFor(a => a.Content, new { @class = "form-control", @placeholder = "Enter Notification Content here", @required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <button href="#" class="btn btn-info btn-xs">Send Push Notification</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

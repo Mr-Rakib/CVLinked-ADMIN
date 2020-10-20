@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CVLAdminPanel.Models.Model.Promotion>
+
+<table class="display table table-bordered" id="individual_search_table" width="100%">
+    <thead class="custom-table">
+        <tr>
+            <th scope="col">Sl No#</th>
+            <th scope="col">Package</th>
+            <th scope="col">Price</th>
+            <th scope="col">CV Downloads</th>
+            <th scope="col">Job Announcements</th>
+            <th scope="col">Validity(Days)</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 1;
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @(i++)
+                    </td>
+                    <td>
+                        @item.PackageName
+                    </td>
+                    <td>
+                        @item.PackagePrice
+                    </td>
+                    <td>
+                        @item.CvDownloads
+                    </td>
+                    <td>
+                        @item.JobAnnouncements
+                    </td>
+                    <td>
+                        @item.Validity
+                    </td>
+                    <td>
+                        @item.StartDate.ToString("dd MMM yyyy")
+                    </td>
+                    <td>
+                        @item.EndDate.ToString("dd MMM yyyy")
+                    </td>
+
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a class="btn btn-default btn-sm" asp-action="Update" asp-controller="PromotionalOffer" asp-route-id="@item.PromotionId"><i class="fa fa-pen text-white p-1"></i></a>
+                            <a class="btn btn-danger btn-sm"  asp-action="DeletePromotions" asp-controller="PromotionalOffer" asp-route-id="@item.PromotionId"><i class="fa fa-times text-white text-info p-1"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

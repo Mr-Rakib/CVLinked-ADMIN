@@ -1,0 +1,160 @@
+﻿@model CVLAdminPanel.Models.Model.Employer
+
+@{
+    ViewBag.HeaderTitle = "COMPANY PROFILE";
+    ViewBag.Header = "Profile";
+}
+
+<div class="modal-content">
+    <div class="modal-body">
+        <div class="col-lg-12">
+
+            <div class="row mb-2">
+                <h2 class="col-md-8 text-primary">
+                    @(Model.companyInfo.companyName == "" ? "Not Set" : Model.companyInfo.companyName)
+                    @{ if (Model.confirmedEmail)
+                        { <i class="fa fa-check-circle text-success"></i>}
+                        else
+                        {<i class="fa fa-times-circle text-danger"></i>}
+                    }
+                </h2>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-8 pl-2">
+                    <div class="form-row">
+                        <label class="col-md-12">
+                            <i class="far fa-id-badge"></i>
+                            @(Model.companyInfo.companyContactNo == "" ? "Not Set" : Model.companyInfo.companyContactNo)
+                        </label>
+                        <label class=" col-md-12">
+                            <i class="fas fa-envelope-open-text"></i>
+                            @(Model.email == "" ? "Not Set" : Model.email)
+                        </label>
+                        <label class="col-md-12">
+                            <i class="far fa-address-card"></i>
+                            @Model.companyInfo.address
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4 text-right">
+                    @if (string.IsNullOrEmpty(Model.companyInfo.companyLogoName))
+                    {
+                        <img src="~/Content/img/brand/logo.png" class="company-img" />
+                    }
+                    else
+                    {
+                        <img class="company-img" src="https://s3.ap-south-1.amazonaws.com/cvlinked/CorporateLogos/@Html.DisplayFor(modelModel => Model.companyInfo.companyLogoName)" />
+                    }
+                </div>
+            </div>
+
+            <label class=" h5 text-center p-2 text-white col-md-12 bg-primary">COMPANY INFORMATION</label>
+
+            <div class="form-row custom-border-top pt-3">
+                <div class="form-group col-md-6">
+                    <div class="form-row  cal-md-12 p-1">
+                        <label class="col-md-5" asp-for="@Model.companyInfo.businessCategory.businessCategoryName"> </label>
+                        <label class="col-md-7 "> @(Model.companyInfo.businessCategory.businessCategoryName == "" ? "Not Set" : Model.companyInfo.businessCategory.businessCategoryName)</label>
+
+                        <label class="col-md-5" asp-for="@Model.companyInfo.companyTin"> </label>
+                        <label class="col-md-7 ">@(Model.companyInfo.companyTin == "" ? "Not Set" : Model.companyInfo.companyTin)</label>
+
+                        <label class="col-md-5" asp-for="@Model.companyInfo.employeeSize.employeeSizeName"> </label>
+                        <label class="col-md-7 "> @(Model.companyInfo.employeeSize.employeeSizeName == "" ? "Not Set" : Model.companyInfo.employeeSize.employeeSizeName)</label>
+
+                        <label class="col-md-5" asp-for="@Model.companyInfo.establishmentYear"></label>
+                        <label class="col-md-7 ">@(Model.companyInfo.establishmentYear)</label>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <div class="form-row  cal-md-12 p-1">
+                        <label class="col-md-5" asp-for="@Model.registeredDate"></label>
+                        @if (Model.registeredDate != null)
+                        {
+                            <label class="col-md-7">@Model.registeredDate</label>
+                        }
+                        else
+                        {
+                            <label class="col-md-7">Not Set</label>
+                        }
+
+                        <label class="col-md-5" asp-for="@Model.lastLoginDate"></label>
+                        @if (Model.lastLoginDate != null)
+                        {
+                            <label class="col-md-7">@Model.lastLoginDate</label>
+                        }
+                        else
+                        {
+                            <label class="col-md-7">Not Set</label>
+                        }
+
+                        <label class="col-md-5" asp-for="@Model.accessFailedCount"></label>
+                        <label class="col-md-7 "> @(Model.accessFailedCount == 0 ? 0 : Model.accessFailedCount)</label>
+
+                        <label class="col-md-5" asp-for="@Model.referral.referralName"></label>
+                        <label class="col-md-7 "> @(Model.referral.referralName == "" ? "Not Set" : Model.referral.referralName)</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row border-top pt-2">
+                <div class="form-group col-md-6">
+                    <div class="form-row  cal-md-12">
+                        <label class="h5 form-group text-center text-primary  border-bottom pb-2" style="width:100%">CONTACT INFORMATION</label>
+                        <div class="form-row  ">
+                            <label class="col-md-5" asp-for="@Model.registeredPhoneNo"> </label>
+                            <label class="col-md-7 "> @(Model.registeredPhoneNo == "" ? "Not Set" : Model.registeredPhoneNo)</label>
+
+                            <label class="col-md-5" asp-for="@Model.companyInfo.supportEmail"> </label>
+                            <label class="col-md-7 ">@(Model.companyInfo.supportEmail == "" ? "Not Set" : Model.companyInfo.supportEmail )</label>
+
+                            <label class="col-md-5" asp-for="@Model.companyInfo.billingAddress"> </label>
+                            <label class="col-md-7 "> @(Model.companyInfo.billingAddress == "" ? "Not Set" : Model.companyInfo.billingAddress)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="form-row  cal-md-12">
+                        <label class="h5 form-group text-center text-primary border-bottom pb-2" style="width:100%">CONTACT PERSON</label>
+                        <div class="form-row ">
+                            <label class="col-md-5" asp-for="@Model.companyInfo.contactPerson.contactPersonName"> </label>
+                            <label class="col-md-7 ">@(Model.companyInfo.contactPerson.contactPersonName == "" ? "Not Set" : Model.companyInfo.contactPerson.contactPersonName)</label>
+
+                            <label class="col-md-5" asp-for="@Model.companyInfo.contactPerson.contactPersonDesignation"></label>
+                            <label class="col-md-7 "> @(Model.companyInfo.contactPerson.contactPersonDesignation == "" ? "Not Set" : Model.companyInfo.contactPerson.contactPersonDesignation)</label>
+
+                            <label class="col-md-5" asp-for="@Model.companyInfo.contactPerson.contactPersonMobile"></label>
+                            <label class="col-md-7 "> @(Model.companyInfo.contactPerson.contactPersonMobile  == "" ? "Not Set" : Model.companyInfo.contactPerson.contactPersonMobile)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!---Email Modal--->
+<div class="modal fade" id="company-email-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document" id="companyEmailModal">
+
+    </div>
+</div>
+<!---SMS Modal--->
+<div class="modal fade" id="sms-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document" id="companySmsModal">
+
+    </div>
+</div>
+<!---View Details Modal--->
+<div class="modal fade" id="view-details-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-" role="document" id="viewdetailsmodal">
+
+    </div>
+</div>
+

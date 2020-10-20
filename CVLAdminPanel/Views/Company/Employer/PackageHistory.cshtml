@@ -1,0 +1,57 @@
+﻿@model CVLAdminPanel.Models.Model.Employer
+
+@{
+    ViewData["Title"] = "Employer Profile";
+    ViewBag.HeaderTitle = "EMPLOYER DETAILS";
+    ViewBag.Header = "PACKAGE HISTORY";
+}
+
+<div class="row Company-List-View">
+    <div class="col-md-12 text-center">
+        <h3 class="text-primary p-3">PACKAGE HISTORY</h3>
+    </div>
+
+    <div class="table-responsive">
+        <table class="display table table-bordered" id="package_history_table" width="100%">
+            <thead class="custom-table">
+                <tr>
+                    <th>Package Name</th>
+                    <th>Cost</th>
+                    <th>Registration Date</th>
+                    <th>End Date</th>
+                    <th>Total CV</th>
+                    <th>Remains (CV)</th>
+                    <th>Validity</th>
+                </tr>
+            </thead>
+
+            <tfoot>
+                <tr>
+                    <th>Package Name</th>
+                    <th>Cost</th>
+                    <th>Registration Date</th>
+                    <th>End Date</th>
+                    <th>Total CV</th>
+                    <th>Remains (CV)</th>
+                    <th>Validity</th>
+                </tr>
+            </tfoot>
+
+            <tbody>
+                @foreach (var item in Model.PackageSubscriptionHistories)
+                {
+                    <tr>
+                        <td class="text-left pl-2">@item.packageName</td>
+                        <td class="text-left pl-2">@item.packagePrice</td>
+                        <td class="text-left pl-2">@item.startDate</td>
+                        <td class="text-left pl-2">@item.endDate</td>
+                        <td class="text-left pl-2">@item.cvDownloads</td>
+                        <td class="text-left pl-2">@item.remainingCVDownloads</td>
+                        <td class="text-left pl-2">@item.validity Days</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
